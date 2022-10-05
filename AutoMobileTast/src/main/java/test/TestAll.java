@@ -18,7 +18,7 @@ public class TestAll extends BaseSetUp {
     @Test(priority = 0)
     public void CreateProject() throws InterruptedException {
         ProjectPage projectPage = new ProjectPage(getAndroidDriver());
-        projectPage.OpenApp();
+        projectPage.Login();
         ProjectAPI projectAPI = new ProjectAPI();
         projectAPI.CreateProject();
         projectPage.VerifyProject();
@@ -32,5 +32,12 @@ public class TestAll extends BaseSetUp {
     public void  Verify(){
         TaskAPI taskAPI = new TaskAPI();
         taskAPI.Verify();
+    }
+    @Test(priority = 3)
+    public void ReOpen() throws MalformedURLException, InterruptedException {
+        LaunchApp();
+        ProjectPage projectPage = new ProjectPage(getAndroidDriver());
+        projectPage.Login();
+        projectPage.OpenProject();
     }
 }

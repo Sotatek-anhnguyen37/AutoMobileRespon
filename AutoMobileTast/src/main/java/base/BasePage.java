@@ -19,6 +19,8 @@ public class BasePage {
     protected WebDriver driver = null;
     private WebDriverWait wait;
     private Actions action;
+
+    private int radom;
     private static AndroidDriver<?> driver1;
 
     public BasePage(WebDriver driver) {
@@ -40,6 +42,7 @@ public class BasePage {
     public WebDriver getDriver() {
         return driver;
     }
+    public int setRandom(int ramdom){return radom;}
 
     public void clickElement(WebElement e) {
         getExplicitWait().until(ExpectedConditions.visibilityOfAllElements(e));

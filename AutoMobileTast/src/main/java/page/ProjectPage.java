@@ -26,7 +26,16 @@ public class ProjectPage extends BasePage {
     private WebElement passWord;
     @FindBy(id = "com.todoist:id/btn_log_in")
     private WebElement logIn;
-    public void OpenApp() throws InterruptedException {
+    @FindBy(id = "com.todoist:id/fab")
+    private WebElement plus;
+    @FindBy(id = "android:id/message")
+    private WebElement titleTask;
+    @FindBy(id = "com.todoist:id/description")
+    private WebElement descriptionTask;
+
+    @FindBy(id = "android:id/button1")
+    private WebElement submitTask;
+    public void Login() throws InterruptedException {
         clickElement(continueEmail);
         sendKeyElement(textBoxEmail, Common.EMAIL);
         clickElement(continueWithEmail);
@@ -41,5 +50,13 @@ public class ProjectPage extends BasePage {
         String nameProjectActual = project.findElement(By.xpath(".//android.widget.TextView")).getText();
         Assert.assertEquals(nameProjectActual, "Baymax");
         System.out.println("Verify project success");
+    }
+    public void OpenProject(){
+        clickElement(menu);
+        clickElement(project);
+        clickElement(plus);
+        sendKeyElement(titleTask, Common.TITLE_TASK);
+        sendKeyElement(descriptionTask, Common.DESCRIPTION_TASK);
+        clickElement(submitTask);
     }
 }

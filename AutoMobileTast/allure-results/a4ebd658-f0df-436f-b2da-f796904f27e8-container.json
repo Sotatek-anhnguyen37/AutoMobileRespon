@@ -1,0 +1,1 @@
+{"uuid":"a4ebd658-f0df-436f-b2da-f796904f27e8","name":"test.TestAll","children":["b05101f7-6fd2-4937-98a7-6adc4a812959"],"befores":[{"name":"OpenApp","status":"passed","stage":"finished","description":"","steps":[],"attachments":[],"parameters":[],"start":1664866615078,"stop":1664866622893}],"afters":[],"links":[],"start":1664866615053,"stop":1664866633880}

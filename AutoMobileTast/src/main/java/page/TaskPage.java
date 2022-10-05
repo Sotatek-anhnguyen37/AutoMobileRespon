@@ -6,6 +6,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import javax.swing.plaf.TableHeaderUI;
+
 public class TaskPage extends BasePage {
 
     public TaskPage(WebDriver driver) {
@@ -27,12 +29,12 @@ public class TaskPage extends BasePage {
     @FindBy(id = "com.todoist:id/empty_content")
     private WebElement exit;
 
-    public void CreateTask(){
+    public void CreateTask() throws InterruptedException {
+        Thread.sleep(3000);
         clickElement(project);
         clickElement(plus);
         sendKeyElement(titleTask, Common.TITLE_TASK);
         sendKeyElement(descriptionTask, Common.DESCRIPTION_TASK);
         clickElement(submitTask);
-        clickElement(exit);
     }
 }

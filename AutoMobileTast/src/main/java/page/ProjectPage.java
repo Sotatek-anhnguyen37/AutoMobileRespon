@@ -12,6 +12,7 @@ public class ProjectPage extends BasePage {
     public ProjectPage(WebDriver driver) {
         super(driver);
     }
+
     @FindBy(xpath = "//android.widget.ImageButton[@content-desc='Menu']")
     private WebElement menu;
     @FindBy(xpath = "//android.widget.RelativeLayout[last()]")
@@ -35,6 +36,7 @@ public class ProjectPage extends BasePage {
 
     @FindBy(id = "android:id/button1")
     private WebElement submitTask;
+
     public void Login() throws InterruptedException {
         clickElement(continueEmail);
         sendKeyElement(textBoxEmail, Common.EMAIL);
@@ -46,17 +48,19 @@ public class ProjectPage extends BasePage {
         clickElement(menu);
         Thread.sleep(15000);
     }
+
     public void VerifyProject() throws InterruptedException {
         String nameProjectActual = project.findElement(By.xpath(".//android.widget.TextView")).getText();
         Assert.assertEquals(nameProjectActual, "Baymax");
         System.out.println("Verify project success");
     }
-    public void OpenProject(){
+
+    public void OpenProject(int random2) {
         clickElement(menu);
         clickElement(project);
         clickElement(plus);
-        sendKeyElement(titleTask, Common.TITLE_TASK);
-        sendKeyElement(descriptionTask, Common.DESCRIPTION_TASK);
+        sendKeyElement(titleTask, Common.TITLE_TASK + random2);
+        sendKeyElement(descriptionTask, Common.DESCRIPTION_TASK+random2);
         clickElement(submitTask);
     }
 }

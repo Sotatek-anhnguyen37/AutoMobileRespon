@@ -14,13 +14,11 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.util.concurrent.TimeUnit;
 
 public class BasePage {
-    private static final int TIME_OUT = 10;
+    private static final int TIME_OUT = 20;
 
     protected WebDriver driver = null;
     private WebDriverWait wait;
     private Actions action;
-
-    private int radom;
     private static AndroidDriver<?> driver1;
 
     public BasePage(WebDriver driver) {
@@ -42,18 +40,19 @@ public class BasePage {
     public WebDriver getDriver() {
         return driver;
     }
-    public int setRandom(int ramdom){return radom;}
 
     public void clickElement(WebElement e) {
         getExplicitWait().until(ExpectedConditions.visibilityOfAllElements(e));
         e.click();
     }
+
     public void sendKeyElement(WebElement e, String key) {
         getExplicitWait().until(ExpectedConditions.visibilityOfAllElements(e));
         e.sendKeys(key);
     }
-    public void tapToPosition(int x, int y){
+
+    public void tapToPosition(int x, int y) {
         TouchAction action = new TouchAction(driver1);
-        action.tap(TapOptions.tapOptions().withPosition(PointOption.point(x,y))).perform();
+        action.tap(TapOptions.tapOptions().withPosition(PointOption.point(x, y))).perform();
     }
 }

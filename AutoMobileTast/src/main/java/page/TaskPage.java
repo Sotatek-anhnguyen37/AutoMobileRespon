@@ -6,11 +6,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import javax.swing.plaf.TableHeaderUI;
-
 public class TaskPage extends BasePage {
-
-    @FindBy(xpath = "//android.widget.RelativeLayout[last()]")
+    @FindBy(xpath = "//android.widget.TextView[@text=\"Baymax\"]")
     private WebElement project;
     @FindBy(id = "com.todoist:id/fab")
     private WebElement plus;
@@ -21,23 +18,17 @@ public class TaskPage extends BasePage {
 
     @FindBy(id = "android:id/button1")
     private WebElement submitTask;
+
     public TaskPage(WebDriver driver) {
         super(driver);
     }
 
-    public int Radom(){
-        int radom = (int) Math.floor((Math.random() * 9 )) + 1;
-        return radom;
-    }
-
-    public void CreateTask() throws InterruptedException {
-        int radom = setRandom(Radom());
-        String titleTask_Random = Common.TITLE_TASK + radom;
+    public void CreateTask(int radom) throws InterruptedException {
         Thread.sleep(3000);
         clickElement(project);
         clickElement(plus);
-        sendKeyElement(titleTask, titleTask_Random);
-        sendKeyElement(descriptionTask, Common.DESCRIPTION_TASK);
+        sendKeyElement(titleTask, Common.TITLE_TASK + radom);
+        sendKeyElement(descriptionTask, Common.DESCRIPTION_TASK+radom);
         clickElement(submitTask);
     }
 }

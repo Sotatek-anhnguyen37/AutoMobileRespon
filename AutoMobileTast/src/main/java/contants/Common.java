@@ -9,5 +9,6 @@ public class Common {
     public static final String URL_GET_TASK = "https://api.todoist.com/rest/v2/tasks/%id";
     public static final String EMAIL = "01112000hda@gmail.com";
     public static final String PASSWORD = "Baymax2000";
+    public static final String URL_REOPEN = "https://api.todoist.com/rest/v2/tasks/%s/reopen";
 
 }

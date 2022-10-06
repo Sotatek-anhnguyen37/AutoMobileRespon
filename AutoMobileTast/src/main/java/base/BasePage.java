@@ -4,6 +4,7 @@ import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.touch.TapOptions;
 import io.appium.java_client.touch.offset.PointOption;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -54,5 +55,9 @@ public class BasePage {
     public void tapToPosition(int x, int y) {
         TouchAction action = new TouchAction(driver1);
         action.tap(TapOptions.tapOptions().withPosition(PointOption.point(x, y))).perform();
+    }
+    public String getDynamicLink(String link, String id) {
+        link = String.format(link, id);
+        return link;
     }
 }

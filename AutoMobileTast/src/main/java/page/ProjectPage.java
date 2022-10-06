@@ -8,6 +8,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.testng.Assert;
 
+import javax.annotation.concurrent.ThreadSafe;
+
 public class ProjectPage extends BasePage {
     public ProjectPage(WebDriver driver) {
         super(driver);
@@ -15,7 +17,7 @@ public class ProjectPage extends BasePage {
 
     @FindBy(xpath = "//android.widget.ImageButton[@content-desc='Menu']")
     private WebElement menu;
-    @FindBy(xpath = "//android.widget.RelativeLayout[last()]")
+    @FindBy(xpath = "(//android.widget.TextView[@resource-id=\"com.todoist:id/name\"])[last()]")
     private WebElement project;
     @FindBy(id = "com.todoist:id/btn_welcome_email")
     private WebElement continueEmail;
@@ -31,36 +33,48 @@ public class ProjectPage extends BasePage {
     private WebElement plus;
     @FindBy(id = "android:id/message")
     private WebElement titleTask;
-    @FindBy(id = "com.todoist:id/description")
+    @FindBy(xpath = "//android.widget.EditText[last()]")
     private WebElement descriptionTask;
 
     @FindBy(id = "android:id/button1")
     private WebElement submitTask;
 
+    @FindBy(id = "com.todoist:id/quick_add_item_container")
+    private WebElement exit;
+    @FindBy(xpath = "")
+    private WebElement task;
+
+    @FindBy(id = "com.todoist:id/item_checkmark")
+    private WebElement checkbox;
+
     public void Login() throws InterruptedException {
+        Thread.sleep(5000);
         clickElement(continueEmail);
         sendKeyElement(textBoxEmail, Common.EMAIL);
         clickElement(continueWithEmail);
-        Thread.sleep(3000);
+        Thread.sleep(5000);
         sendKeyElement(passWord, Common.PASSWORD);
         clickElement(logIn);
         Thread.sleep(10000);
         clickElement(menu);
-        Thread.sleep(15000);
     }
 
     public void VerifyProject() throws InterruptedException {
-        String nameProjectActual = project.findElement(By.xpath(".//android.widget.TextView")).getText();
+        String nameProjectActual = project.getText();
         Assert.assertEquals(nameProjectActual, "Baymax");
         System.out.println("Verify project success");
     }
 
     public void OpenProject(int random2) {
+        String xpathTask = "//android.widget.RelativeLayout//android.widget.TextView[@text=\"%s\"]/preceding-sibling::*";
+        String xpathTask2 = getDynamicLink(xpathTask,Common.TITLE_TASK+random2);
         clickElement(menu);
         clickElement(project);
         clickElement(plus);
         sendKeyElement(titleTask, Common.TITLE_TASK + random2);
-        sendKeyElement(descriptionTask, Common.DESCRIPTION_TASK+random2);
+        sendKeyElement(descriptionTask, Common.DESCRIPTION_TASK + random2);
         clickElement(submitTask);
+        clickElement(exit);
+        clickElement(getDriver().findElement(By.xpath(xpathTask2)));
     }
 }

@@ -11,10 +11,11 @@ import java.util.HashMap;
 import java.util.Objects;
 
 public class BaseAPI {
-    //    public String getDynamicLink(String link, String... id){
-//        link = String.format(link, (Object[]) id);
-//        return link;
-//    }
+    public String getDynamicLink(String link, String id) {
+        link = String.format(link, id);
+        return link;
+    }
+
     public void sendPost(String link) {
         JSONObject request = new JSONObject();
         request.put("name", "Baymax");

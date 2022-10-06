@@ -1,6 +1,6 @@
 package base;
 
-public class Content {
+public class Task {
     private String id;
     private String content;
     public String getId() {

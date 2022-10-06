@@ -7,7 +7,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 public class TaskPage extends BasePage {
-    @FindBy(xpath = "//android.widget.TextView[@text=\"Baymax\"]")
+    @FindBy(xpath = "(//android.widget.TextView[@resource-id=\"com.todoist:id/name\"])[last()]")
     private WebElement project;
     @FindBy(id = "com.todoist:id/fab")
     private WebElement plus;

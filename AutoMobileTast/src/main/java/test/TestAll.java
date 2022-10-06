@@ -22,10 +22,10 @@ public class TestAll extends BaseSetUp {
 
     @Test(priority = 0)
     public void CreateProject() throws InterruptedException {
-        ProjectPage projectPage = new ProjectPage(getAndroidDriver());
-        projectPage.Login();
         ProjectAPI projectAPI = new ProjectAPI();
         projectAPI.CreateProject();
+        ProjectPage projectPage = new ProjectPage(getAndroidDriver());
+        projectPage.Login();
         projectPage.VerifyProject();
     }
 

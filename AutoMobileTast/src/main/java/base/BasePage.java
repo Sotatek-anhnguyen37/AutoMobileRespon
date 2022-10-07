@@ -52,10 +52,6 @@ public class BasePage {
         e.sendKeys(key);
     }
 
-    public void tapToPosition(int x, int y) {
-        TouchAction action = new TouchAction(driver1);
-        action.tap(TapOptions.tapOptions().withPosition(PointOption.point(x, y))).perform();
-    }
     public String getDynamicLink(String link, String id) {
         link = String.format(link, id);
         return link;

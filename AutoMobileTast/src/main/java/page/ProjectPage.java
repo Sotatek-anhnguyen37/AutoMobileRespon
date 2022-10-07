@@ -29,23 +29,6 @@ public class ProjectPage extends BasePage {
     private WebElement passWord;
     @FindBy(id = "com.todoist:id/btn_log_in")
     private WebElement logIn;
-    @FindBy(id = "com.todoist:id/fab")
-    private WebElement plus;
-    @FindBy(id = "android:id/message")
-    private WebElement titleTask;
-    @FindBy(xpath = "//android.widget.EditText[last()]")
-    private WebElement descriptionTask;
-
-    @FindBy(id = "android:id/button1")
-    private WebElement submitTask;
-
-    @FindBy(id = "com.todoist:id/quick_add_item_container")
-    private WebElement exit;
-    @FindBy(xpath = "")
-    private WebElement task;
-
-    @FindBy(id = "com.todoist:id/item_checkmark")
-    private WebElement checkbox;
 
     public void Login() throws InterruptedException {
         Thread.sleep(5000);
@@ -55,26 +38,14 @@ public class ProjectPage extends BasePage {
         Thread.sleep(5000);
         sendKeyElement(passWord, Common.PASSWORD);
         clickElement(logIn);
-        Thread.sleep(10000);
+        Thread.sleep(5000);
         clickElement(menu);
     }
 
     public void VerifyProject() throws InterruptedException {
+        Thread.sleep(3000);
         String nameProjectActual = project.getText();
         Assert.assertEquals(nameProjectActual, "Baymax");
         System.out.println("Verify project success");
-    }
-
-    public void OpenProject(int random2) {
-        String xpathTask = "//android.widget.RelativeLayout//android.widget.TextView[@text=\"%s\"]/preceding-sibling::*";
-        String xpathTask2 = getDynamicLink(xpathTask,Common.TITLE_TASK+random2);
-        clickElement(menu);
-        clickElement(project);
-        clickElement(plus);
-        sendKeyElement(titleTask, Common.TITLE_TASK + random2);
-        sendKeyElement(descriptionTask, Common.DESCRIPTION_TASK + random2);
-        clickElement(submitTask);
-        clickElement(exit);
-        clickElement(getDriver().findElement(By.xpath(xpathTask2)));
     }
 }

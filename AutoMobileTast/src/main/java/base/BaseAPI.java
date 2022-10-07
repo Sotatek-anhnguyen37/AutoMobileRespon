@@ -6,9 +6,7 @@ import org.json.simple.JSONObject;
 
 import static io.restassured.RestAssured.*;
 
-
 import java.util.HashMap;
-import java.util.Objects;
 
 public class BaseAPI {
     public String getDynamicLink(String link, String id) {
@@ -41,5 +39,16 @@ public class BaseAPI {
                 .then()
                 .statusCode(200).extract().response();
         return response;
+    }
+
+    public void sendReOpen(String link) {
+        HashMap<String, Object> header = new HashMap<>();
+        header.put("Authorization", "Bearer " + Common.TOKEN);
+        given()
+                .headers(header)
+                .when()
+                .post(link)
+                .then()
+                .statusCode(204).extract().response();
     }
 }

@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TaskAPI extends BaseAPI {
-    @Test
+
     public List<Task> GetTaskList() {
         List<Task> taskList = new ArrayList<>();
         Response response = sendGetAll(Common.URL_GETALL_TASK);
@@ -26,7 +26,6 @@ public class TaskAPI extends BaseAPI {
         return taskList;
     }
 
-    @Test
     public void VerifyTask(int random) {
         List<Task> ls = GetTaskList();
         for (Task ct : ls) {
@@ -40,19 +39,19 @@ public class TaskAPI extends BaseAPI {
     }
 
     public String GetTaskId(String taskName) {
-        String id = null;
+        String id = "";
         List<Task> tls = GetTaskList();
         for (Task t : tls) {
-            if (t.getContent() == taskName) {
+            if (t.getContent().equals(taskName)) {
                 id = t.getId();
             }
         }
         return id;
     }
 
-    public void ReOpenTask(String taskName) {
-        String id = GetTaskId(taskName);
+    public void ReOpenTask(String id) {
         String link = getDynamicLink(Common.URL_REOPEN, id);
-
+        System.out.println("link reopen :" + link);
+        sendReOpen(link);
     }
 }

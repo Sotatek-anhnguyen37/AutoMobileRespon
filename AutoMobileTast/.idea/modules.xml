@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/AutoMobileTast.iml" filepath="$PROJECT_DIR$/AutoMobileTast.iml" />
+      <module fileurl="file://$PROJECT_DIR$/AutoMobileTest.iml" filepath="$PROJECT_DIR$/AutoMobileTest.iml" />
     </modules>
   </component>
 </project>

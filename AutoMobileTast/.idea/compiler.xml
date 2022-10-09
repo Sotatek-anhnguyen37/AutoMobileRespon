@@ -6,11 +6,11 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="AutoMobileTast" />
+        <module name="AutoMobileTest" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="AutoMobileTast" target="19" />
+      <module name="AutoMobileTest" target="19" />
     </bytecodeTargetLevel>
   </component>
 </project>

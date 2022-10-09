@@ -17,7 +17,7 @@ public class TestAll extends BaseSetUp {
     public static final String DESCRIPTION_TASK = "8 steps warmup";
     public static final String EMAIL = "01112000hda@gmail.com";
     public static final String PASSWORD = "Baymax2000";
-    public static final String NAME_PROJECT = "Baymax";
+    public static final String NAME_PROJECT = "Daily Routine";
     public static final String TOKEN = "b88350fbebd28a1defd3c53676ea414c158c9a5e";
     private String nameTask = TITLE_TASK + RandomNumber.randomNumber();
     private String description = DESCRIPTION_TASK + RandomNumber.randomNumber();
@@ -29,12 +29,12 @@ public class TestAll extends BaseSetUp {
 
 
     @BeforeClass
-    public void OpenApp() throws MalformedURLException {
+    public void openApp() throws MalformedURLException {
         launchApp();
     }
 
     @Test(priority = 0)
-    public void createProjectAndTask() throws InterruptedException, MalformedURLException {
+    public void autoMobileTest() throws InterruptedException, MalformedURLException {
         ProjectAPI projectAPI = new ProjectAPI();
         ProjectPage projectPage = new ProjectPage(getAndroidDriver());
         TaskPage taskPage = new TaskPage(getAndroidDriver());

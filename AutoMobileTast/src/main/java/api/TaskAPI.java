@@ -1,20 +1,19 @@
 package api;
 
 import base.BaseAPI;
-import base.Task;
-import contants.Common;
+import object.Task;
+import contants.Link;
 import io.restassured.response.Response;
 import org.testng.Assert;
-import org.testng.annotations.Test;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class TaskAPI extends BaseAPI {
 
-    public List<Task> GetTaskList() {
+    public List<Task> getTaskList(String token) {
         List<Task> taskList = new ArrayList<>();
-        Response response = sendGetAll(Common.URL_GETALL_TASK);
+        Response response = sendGetAll(Link.URL_GETALL_TASK, token);
         List<String> listContent = response.jsonPath().getList("content");
         List<String> listId = response.jsonPath().getList("id");
         for (int i = 0; i < listId.size(); i++) {
@@ -26,11 +25,11 @@ public class TaskAPI extends BaseAPI {
         return taskList;
     }
 
-    public void VerifyTask(int random) {
-        List<Task> ls = GetTaskList();
+    public void verifyTask(String nameTask, String token) {
+        List<Task> ls = getTaskList(token);
         for (Task ct : ls) {
             try {
-                Assert.assertEquals(ct.getContent(), Common.TITLE_TASK + random);
+                Assert.assertEquals(ct.getContent(), nameTask);
                 System.out.println("Verify task success");
             } catch (Exception e) {
                 continue;
@@ -38,9 +37,9 @@ public class TaskAPI extends BaseAPI {
         }
     }
 
-    public String GetTaskId(String taskName) {
+    public String getTaskId(String taskName, String token) {
         String id = "";
-        List<Task> tls = GetTaskList();
+        List<Task> tls = getTaskList(token);
         for (Task t : tls) {
             if (t.getContent().equals(taskName)) {
                 id = t.getId();
@@ -49,9 +48,9 @@ public class TaskAPI extends BaseAPI {
         return id;
     }
 
-    public void ReOpenTask(String id) {
-        String link = getDynamicLink(Common.URL_REOPEN, id);
+    public void reOpenTask(String id, String token) {
+        String link = getDynamicLink(Link.URL_REOPEN, id);
         System.out.println("link reopen :" + link);
-        sendReOpen(link);
+        sendReOpen(link, token);
     }
 }

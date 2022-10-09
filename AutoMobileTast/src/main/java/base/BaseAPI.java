@@ -1,6 +1,6 @@
 package base;
 
-import contants.Common;
+import contants.Link;
 import io.restassured.response.Response;
 import org.json.simple.JSONObject;
 
@@ -14,14 +14,14 @@ public class BaseAPI {
         return link;
     }
 
-    public void sendPost(String link) {
+    public void sendPost(String link, String nameProject, String token) {
         JSONObject request = new JSONObject();
-        request.put("name", "Baymax");
-        HashMap<String, Object> headers = new HashMap<>();
-        headers.put("Content-Type", "application/json");
-        headers.put("Authorization", "Bearer " + Common.TOKEN);
+        request.put("name", nameProject );
+        HashMap<String, Object> header = new HashMap<>();
+        header.put("Content-Type", "application/json");
+        header.put("Authorization", "Bearer " + token);
         given()
-                .headers(headers)
+                .headers(header)
                 .body(request)
                 .when()
                 .post(link)
@@ -29,9 +29,9 @@ public class BaseAPI {
                 .statusCode(200);
     }
 
-    public Response sendGetAll(String link) {
+    public Response sendGetAll(String link, String token) {
         HashMap<String, Object> header = new HashMap<>();
-        header.put("Authorization", "Bearer " + Common.TOKEN);
+        header.put("Authorization", "Bearer " + token);
         Response response = given()
                 .headers(header)
                 .when()
@@ -41,13 +41,24 @@ public class BaseAPI {
         return response;
     }
 
-    public void sendReOpen(String link) {
+    public void sendReOpen(String link, String token) {
         HashMap<String, Object> header = new HashMap<>();
-        header.put("Authorization", "Bearer " + Common.TOKEN);
+        header.put("Authorization", "Bearer " + token);
         given()
                 .headers(header)
                 .when()
                 .post(link)
+                .then()
+                .statusCode(204).extract().response();
+    }
+
+    public void sendDelete(String link, String token) {
+        HashMap<String, Object> header = new HashMap<>();
+        header.put("Authorization", "Bearer " + token);
+        given()
+                .headers(header)
+                .when()
+                .delete(link)
                 .then()
                 .statusCode(204).extract().response();
     }

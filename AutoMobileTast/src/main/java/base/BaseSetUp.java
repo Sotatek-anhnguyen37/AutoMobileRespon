@@ -11,7 +11,7 @@ import java.net.URL;
 
 public class BaseSetUp {
     private AndroidDriver driver;
-    public void LaunchApp() throws MalformedURLException {
+    public void launchApp() throws MalformedURLException {
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability(CapabilityType.BROWSER_NAME,"");
         capabilities.setCapability("udid","emulator-5554");

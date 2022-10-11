@@ -1,6 +1,5 @@
 package base;
 
-import contants.Link;
 import io.restassured.response.Response;
 import org.json.simple.JSONObject;
 
@@ -9,11 +8,6 @@ import static io.restassured.RestAssured.*;
 import java.util.HashMap;
 
 public class BaseAPI {
-    public String getDynamicLink(String link, String id) {
-        link = String.format(link, id);
-        return link;
-    }
-
     public void sendPost(String link, String nameProject, String token) {
         JSONObject request = new JSONObject();
         request.put("name", nameProject );

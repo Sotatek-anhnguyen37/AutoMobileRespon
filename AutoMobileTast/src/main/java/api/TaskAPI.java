@@ -1,8 +1,10 @@
 package api;
 
 import base.BaseAPI;
+import io.restassured.response.ResponseBody;
+import object.Project;
 import object.Task;
-import contants.Link;
+import contants.EndPoint;
 import io.restassured.response.Response;
 import org.testng.Assert;
 
@@ -13,7 +15,7 @@ public class TaskAPI extends BaseAPI {
 
     public List<Task> getTaskList(String token) {
         List<Task> taskList = new ArrayList<>();
-        Response response = sendGetAll(Link.URL_GETALL_TASK, token);
+        Response response = sendGetAll(EndPoint.URL_GETALL_TASK, token);
         List<String> listContent = response.jsonPath().getList("content");
         List<String> listId = response.jsonPath().getList("id");
         for (int i = 0; i < listId.size(); i++) {
@@ -40,6 +42,7 @@ public class TaskAPI extends BaseAPI {
     public String getTaskId(String taskName, String token) {
         String id = "";
         List<Task> tls = getTaskList(token);
+        System.out.println("tls: "+tls);
         for (Task t : tls) {
             if (t.getContent().equals(taskName)) {
                 id = t.getId();
@@ -49,7 +52,7 @@ public class TaskAPI extends BaseAPI {
     }
 
     public void reOpenTask(String id, String token) {
-        String link = getDynamicLink(Link.URL_REOPEN, id);
+        String link = String.format(EndPoint.URL_REOPEN, id);
         System.out.println("link reopen :" + link);
         sendReOpen(link, token);
     }

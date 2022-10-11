@@ -1,26 +1,28 @@
 package api;
 
 import base.BaseAPI;
-import com.google.gson.JsonObject;
+import io.restassured.response.ResponseBody;
 import object.Project;
-import contants.Link;
+import contants.EndPoint;
 import io.restassured.response.Response;
-import org.json.simple.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class ProjectAPI extends BaseAPI {
-    public void CreateProject(String nameProject, String token) throws InterruptedException {
-        sendPost(Link.URL_CREATE_PRO, nameProject, token);
+    public void createProject(String nameProject, String token) throws InterruptedException {
+        sendPost(EndPoint.URL_CREATE_PRO, nameProject, token);
     }
-    public void DeleteProject(String id, String token){
-        String link = getDynamicLink(Link.URL_DELETE_PROJECT, id);
+    public void deleteProject(String id, String token){
+        String link = String.format(EndPoint.URL_DELETE_PROJECT, id);
         sendDelete(link, token);
     }
-    public List<Project> GetProjectList(String token) {
+    public List<Project> getProjectList(String token) {
         List<Project> projectList = new ArrayList<>();
-        Response response = sendGetAll(Link.URL_GETALL_PROJECT, token);
+        Response response = sendGetAll(EndPoint.URL_GETALL_PROJECT, token);
+//        List<Project> projectList1 = Arrays.asList(response.getBody().as(Project[].class));
+//        System.out.println(projectList1);
         List<String> listName = response.jsonPath().getList("name");
         List<String> listId = response.jsonPath().getList("id");
         for (int i = 0; i < listId.size(); i++) {
@@ -31,9 +33,9 @@ public class ProjectAPI extends BaseAPI {
         }
         return projectList;
     }
-    public String GetProjectId(String projectName, String token) {
+    public String getProjectId(String projectName, String token) {
         String id = "";
-        List<Project> pls = GetProjectList(token);
+        List<Project> pls = getProjectList(token);
         for (Project p : pls) {
             if (p.getName().equals(projectName)) {
                 id = p.getId();

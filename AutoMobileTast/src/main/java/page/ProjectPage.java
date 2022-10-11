@@ -27,11 +27,10 @@ public class ProjectPage extends BasePage {
     private WebElement logIn;
 
     public void login(String email, String passWord) throws InterruptedException {
-        Thread.sleep(5000);
         clickElement(continueEmail);
         sendKeyElement(textBoxEmail, email);
         clickElement(continueWithEmail);
-        Thread.sleep(10000);
+        Thread.sleep(3000);
         sendKeyElement(textBoxPassword, passWord);
         clickElement(logIn);
         Thread.sleep(5000);

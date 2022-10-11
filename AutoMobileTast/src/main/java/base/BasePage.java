@@ -15,7 +15,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.util.concurrent.TimeUnit;
 
 public class BasePage {
-    private static final int TIME_OUT = 40;
+    private static final int TIME_OUT = 30;
     protected WebDriver driver = null;
     private WebDriverWait wait;
     private Actions action;
@@ -41,17 +41,12 @@ public class BasePage {
     }
 
     public void clickElement(WebElement e) {
-        getExplicitWait().until(ExpectedConditions.visibilityOfAllElements(e));
+        getExplicitWait().until(ExpectedConditions.elementToBeClickable(e));
         e.click();
     }
 
     public void sendKeyElement(WebElement e, String key) {
         getExplicitWait().until(ExpectedConditions.visibilityOfAllElements(e));
         e.sendKeys(key);
-    }
-
-    public String getDynamicLink(String link, String id) {
-        link = String.format(link, id);
-        return link;
     }
 }

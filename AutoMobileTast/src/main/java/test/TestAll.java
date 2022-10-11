@@ -51,7 +51,6 @@ public class TestAll extends BaseSetUp {
         projectPage.login(EMAIL, PASSWORD);
         taskPage.createTask(nameTask2, description2);
         idTask2 = taskAPI.getTaskId(nameTask2, EndPoint.TOKEN);
-        System.out.println("id task 2: "+idTask2);
         taskPage.completeTask(nameTask2);
         taskAPI.reOpenTask(idTask2, EndPoint.TOKEN);
 

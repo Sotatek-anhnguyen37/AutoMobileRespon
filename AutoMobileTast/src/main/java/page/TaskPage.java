@@ -42,6 +42,7 @@ public class TaskPage extends BasePage {
         clickElement(exit);
         String xpathCheckBoxTask1 = String.format(xpathCheckBoxTask, nameTask2);
         clickElement(getDriver().findElement(By.xpath(xpathCheckBoxTask1)));
+        Thread.sleep(5000);
     }
 
     public void verifyTask2(String nameTask2) throws InterruptedException {

@@ -33,7 +33,7 @@ public class ProjectPage extends BasePage {
         Thread.sleep(3000);
         sendKeyElement(textBoxPassword, passWord);
         clickElement(logIn);
-        Thread.sleep(5000);
+        Thread.sleep(3000);
         clickElement(menu);
     }
 

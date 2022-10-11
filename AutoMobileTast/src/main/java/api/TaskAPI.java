@@ -1,6 +1,7 @@
 package api;
 
 import base.BaseAPI;
+import com.fasterxml.jackson.core.type.TypeReference;
 import io.restassured.response.ResponseBody;
 import object.Project;
 import object.Task;
@@ -8,23 +9,17 @@ import contants.EndPoint;
 import io.restassured.response.Response;
 import org.testng.Assert;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
 public class TaskAPI extends BaseAPI {
 
     public List<Task> getTaskList(String token) {
-        List<Task> taskList = new ArrayList<>();
         Response response = sendGetAll(EndPoint.URL_GETALL_TASK, token);
-        List<String> listContent = response.jsonPath().getList("content");
-        List<String> listId = response.jsonPath().getList("id");
-        for (int i = 0; i < listId.size(); i++) {
-            Task ct = new Task();
-            ct.setContent(listContent.get(i));
-            ct.setId(listId.get(i));
-            taskList.add(ct);
-        }
-        return taskList;
+        Type type = new TypeReference<List<Task>>(){}.getType();
+        List<Task> taskList1 = response.getBody().as(type);
+        return taskList1;
     }
 
     public void verifyTask(String nameTask, String token) {
@@ -42,7 +37,6 @@ public class TaskAPI extends BaseAPI {
     public String getTaskId(String taskName, String token) {
         String id = "";
         List<Task> tls = getTaskList(token);
-        System.out.println("tls: "+tls);
         for (Task t : tls) {
             if (t.getContent().equals(taskName)) {
                 id = t.getId();
@@ -53,7 +47,6 @@ public class TaskAPI extends BaseAPI {
 
     public void reOpenTask(String id, String token) {
         String link = String.format(EndPoint.URL_REOPEN, id);
-        System.out.println("link reopen :" + link);
         sendReOpen(link, token);
     }
 }

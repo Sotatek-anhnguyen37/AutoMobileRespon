@@ -7,6 +7,7 @@ import contants.EndPoint;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+import page.LoginPage;
 import page.ProjectPage;
 import page.TaskPage;
 import random.RandomNumber;
@@ -39,34 +40,50 @@ public class TestAll extends BaseSetUp {
         ProjectPage projectPage = new ProjectPage(getAndroidDriver());
         TaskPage taskPage = new TaskPage(getAndroidDriver());
         TaskAPI taskAPI = new TaskAPI();
+        LoginPage loginPage = new LoginPage(getAndroidDriver());
 
-        projectAPI.createProject(NAME_PROJECT, EndPoint.TOKEN);
-        projectPage.login(EMAIL, PASSWORD);
+        projectAPI.createProject(NAME_PROJECT);
+        loginPage.clickContinueEmail();
+        loginPage.sendKeyEmailTextBox(EMAIL);
+        loginPage.clickContinueWithEmail();
+        loginPage.sendKeyTextPassWord(PASSWORD);
+        loginPage.clickLogin();
+        projectPage.clickMenu();
         projectPage.verifyProject(NAME_PROJECT);
 
-        taskPage.createTask(nameTask, description);
-        taskAPI.verifyTask(nameTask, EndPoint.TOKEN);
+        projectPage.clickProject();
+        taskPage.clickPlus();
+        taskPage.sendKeyTitleTask(nameTask);
+        taskPage.sendKeyDescriptionTask(description);
+        taskPage.clickSubmitTask();
+        taskAPI.verifyTask(nameTask);
 
         launchApp();
-        projectPage.login(EMAIL, PASSWORD);
-        taskPage.createTask(nameTask2, description2);
-        idTask2 = taskAPI.getTaskId(nameTask2, EndPoint.TOKEN);
+        loginPage.clickContinueEmail();
+        loginPage.sendKeyEmailTextBox(EMAIL);
+        loginPage.clickContinueWithEmail();
+        loginPage.sendKeyTextPassWord(PASSWORD);
+        loginPage.clickLogin();
+
+        projectPage.clickProject();
+        taskPage.clickPlus();
+        taskPage.sendKeyTitleTask(nameTask2);
+        taskPage.sendKeyDescriptionTask(description2);
+        taskPage.clickSubmitTask();
+
+        idTask2 = taskAPI.getTaskId(nameTask2);
+        taskPage.clickExit();
         taskPage.completeTask(nameTask2);
-        taskAPI.reOpenTask(idTask2, EndPoint.TOKEN);
-
-        ProjectPage projectPage2 = new ProjectPage(getAndroidDriver());
-        TaskPage taskPage2 = new TaskPage(getAndroidDriver());
-        launchApp();
-
-        projectPage2.login(EMAIL, PASSWORD);
-        taskPage2.verifyTask2(nameTask2);
+        taskAPI.reOpenTask(idTask2);
+        Thread.sleep(5000);
+        taskPage.verifyTask2(nameTask2);
     }
 
     @AfterClass
     public void after(){
         ProjectAPI projectAPI = new ProjectAPI();
-        idProject  = projectAPI.getProjectId(NAME_PROJECT, EndPoint.TOKEN);
-        projectAPI.deleteProject(idProject, EndPoint.TOKEN);
+        idProject  = projectAPI.getProjectId(NAME_PROJECT);
+        projectAPI.deleteProject(idProject);
         getAndroidDriver().quit();
     }
 }

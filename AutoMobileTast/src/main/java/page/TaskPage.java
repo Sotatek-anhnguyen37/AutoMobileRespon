@@ -10,8 +10,6 @@ import org.testng.Assert;
 public class TaskPage extends BasePage {
     private String xpathCheckBoxTask = "//android.widget.RelativeLayout//android.widget.TextView[@text=\"%s\"]/preceding-sibling::*";
     private String xpathNameTask = "//android.widget.TextView[@text='%s']";
-    @FindBy(xpath = "//android.widget.ImageButton[@content-desc='Menu']")
-    private WebElement menu;
     @FindBy(xpath = "(//android.widget.TextView[@resource-id=\"com.todoist:id/name\"])[last()]")
     private WebElement project;
     @FindBy(id = "com.todoist:id/fab")
@@ -29,6 +27,19 @@ public class TaskPage extends BasePage {
         super(driver);
     }
 
+    public void clickPlus(){
+        clickElement(plus);
+    }
+    public void sendKeyTitleTask(String value){
+        sendKeyElement(titleTask, value);
+    }
+    public void sendKeyDescriptionTask(String value){
+        sendKeyElement(descriptionTask, value);
+    }
+    public void clickSubmitTask() throws InterruptedException {
+        clickElement(submitTask);
+        Thread.sleep(5000);
+    }
     public void createTask(String nameTask, String description) throws InterruptedException {
         clickElement(project);
         clickElement(plus);
@@ -38,8 +49,10 @@ public class TaskPage extends BasePage {
         Thread.sleep(5000);
     }
 
-    public void completeTask(String nameTask2) throws InterruptedException {
+    public void clickExit(){
         clickElement(exit);
+    }
+    public void completeTask(String nameTask2) throws InterruptedException {
         String xpathCheckBoxTask1 = String.format(xpathCheckBoxTask, nameTask2);
         clickElement(getDriver().findElement(By.xpath(xpathCheckBoxTask1)));
         Thread.sleep(5000);

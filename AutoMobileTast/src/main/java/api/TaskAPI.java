@@ -15,15 +15,16 @@ import java.util.List;
 
 public class TaskAPI extends BaseAPI {
 
-    public List<Task> getTaskList(String token) {
-        Response response = sendGetAll(EndPoint.URL_GETALL_TASK, token);
-        Type type = new TypeReference<List<Task>>(){}.getType();
+    public List<Task> getTaskList() {
+        Response response = sendGet(EndPoint.URL_GETALL_TASK).then().statusCode(200).extract().response();
+        Type type = new TypeReference<List<Task>>() {
+        }.getType();
         List<Task> taskList1 = response.getBody().as(type);
         return taskList1;
     }
 
-    public void verifyTask(String nameTask, String token) {
-        List<Task> ls = getTaskList(token);
+    public void verifyTask(String nameTask) {
+        List<Task> ls = getTaskList();
         for (Task ct : ls) {
             try {
                 Assert.assertEquals(ct.getContent(), nameTask);
@@ -34,9 +35,9 @@ public class TaskAPI extends BaseAPI {
         }
     }
 
-    public String getTaskId(String taskName, String token) {
+    public String getTaskId(String taskName) {
         String id = "";
-        List<Task> tls = getTaskList(token);
+        List<Task> tls = getTaskList();
         for (Task t : tls) {
             if (t.getContent().equals(taskName)) {
                 id = t.getId();
@@ -45,8 +46,8 @@ public class TaskAPI extends BaseAPI {
         return id;
     }
 
-    public void reOpenTask(String id, String token) {
+    public void reOpenTask(String id) {
         String link = String.format(EndPoint.URL_REOPEN, id);
-        sendReOpen(link, token);
+        sendPost(link).then().statusCode(204).extract().response();
     }
 }

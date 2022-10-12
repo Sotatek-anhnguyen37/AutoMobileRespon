@@ -2,15 +2,12 @@ package api;
 
 import base.BaseAPI;
 import com.fasterxml.jackson.core.type.TypeReference;
-import io.restassured.response.ResponseBody;
-import object.Project;
 import object.Task;
 import contants.EndPoint;
 import io.restassured.response.Response;
 import org.testng.Assert;
 
 import java.lang.reflect.Type;
-import java.util.ArrayList;
 import java.util.List;
 
 public class TaskAPI extends BaseAPI {
@@ -26,12 +23,8 @@ public class TaskAPI extends BaseAPI {
     public void verifyTask(String nameTask) {
         List<Task> ls = getTaskList();
         for (Task ct : ls) {
-            try {
-                Assert.assertEquals(ct.getContent(), nameTask);
-                System.out.println("Verify task success");
-            } catch (Exception e) {
-                continue;
-            }
+            Assert.assertEquals(ct.getContent(), nameTask);
+            System.out.println("Verify task success");
         }
     }
 
@@ -46,7 +39,7 @@ public class TaskAPI extends BaseAPI {
         return id;
     }
 
-    public void reOpenTask(String id) {
+    public void reopenTask(String id) {
         String link = String.format(EndPoint.URL_REOPEN, id);
         sendPost(link).then().statusCode(204).extract().response();
     }

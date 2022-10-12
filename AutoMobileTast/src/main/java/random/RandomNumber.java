@@ -1,8 +1,8 @@
 package random;
 
 public class RandomNumber {
-    public static int randomNumber(){
-        int x = (int) ((Math.random())*90 + 10);
-        return x;
+    public static int createRandomNumber(){
+        int random = (int) ((Math.random())*90 + 10);
+        return random;
     }
 }

@@ -1,7 +1,6 @@
 package api;
 
 import base.BaseAPI;
-import io.restassured.RestAssured;
 import object.Project;
 import contants.EndPoint;
 import io.restassured.response.Response;
@@ -9,12 +8,10 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import org.json.simple.JSONObject;
 
 import java.lang.reflect.Type;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class ProjectAPI extends BaseAPI {
-    public void createProject(String nameProject) throws InterruptedException {
+    public void createProject(String nameProject){
         JSONObject request = new JSONObject();
         request.put("name", nameProject);
         sendPost(EndPoint.URL_CREATE_PRO, request).then().statusCode(200).extract().response();

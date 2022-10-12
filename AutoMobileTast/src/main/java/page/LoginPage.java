@@ -15,27 +15,31 @@ public class LoginPage extends BasePage {
     @FindBy(xpath = "//android.widget.EditText")
     private WebElement textBoxPassword;
     @FindBy(id = "com.todoist:id/btn_log_in")
-    private WebElement logIn;
+    private WebElement login;
 
     public LoginPage(WebDriver driver) {
         super(driver);
     }
 
-    public void clickContinueEmail(){
+    public void clickContinueEmailButton() {
         clickElement(continueEmail);
     }
-    public void sendKeyEmailTextBox(String value){
+
+    public void sendKeyEmailTextBox(String value) {
         sendKeyElement(textBoxEmail, value);
     }
-    public void clickContinueWithEmail() throws InterruptedException {
+
+    public void clickContinueWithEmailButton() throws InterruptedException {
         clickElement(continueWithEmail);
         Thread.sleep(3000);
     }
-    public void sendKeyTextPassWord(String value){
+
+    public void sendKeyTextPassword(String value) {
         sendKeyElement(textBoxPassword, value);
     }
-    public void clickLogin() throws InterruptedException {
-        clickElement(logIn);
+
+    public void clickLoginButton() throws InterruptedException {
+        clickElement(login);
         Thread.sleep(5000);
     }
 }

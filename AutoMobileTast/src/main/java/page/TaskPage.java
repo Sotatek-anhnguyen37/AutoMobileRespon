@@ -5,63 +5,55 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.testng.Assert;
 
 public class TaskPage extends BasePage {
     private String xpathCheckBoxTask = "//android.widget.RelativeLayout//android.widget.TextView[@text=\"%s\"]/preceding-sibling::*";
     private String xpathNameTask = "//android.widget.TextView[@text='%s']";
-    @FindBy(xpath = "(//android.widget.TextView[@resource-id=\"com.todoist:id/name\"])[last()]")
-    private WebElement project;
     @FindBy(id = "com.todoist:id/fab")
-    private WebElement plus;
+    private WebElement quickAdd;
     @FindBy(id = "android:id/message")
     private WebElement titleTask;
     @FindBy(xpath = "//android.widget.EditText[last()]")
     private WebElement descriptionTask;
     @FindBy(id = "android:id/button1")
     private WebElement submitTask;
-    @FindBy(id = "com.todoist:id/quick_add_item_container")
-    private WebElement exit;
+    @FindBy(xpath = "(//android.widget.RelativeLayout)[last()]")
+    private WebElement task;
 
     public TaskPage(WebDriver driver) {
         super(driver);
     }
 
-    public void clickPlus(){
-        clickElement(plus);
+    public void clickQuickAddButton() {
+        clickElement(quickAdd);
     }
-    public void sendKeyTitleTask(String value){
+
+    public void sendKeyTitleTask(String value) {
         sendKeyElement(titleTask, value);
     }
-    public void sendKeyDescriptionTask(String value){
+
+    public void sendKeyDescriptionTask(String value) {
         sendKeyElement(descriptionTask, value);
     }
-    public void clickSubmitTask() throws InterruptedException {
+
+    public void clickSubmitTaskButton() throws InterruptedException {
         clickElement(submitTask);
-        Thread.sleep(5000);
-    }
-    public void createTask(String nameTask, String description) throws InterruptedException {
-        clickElement(project);
-        clickElement(plus);
-        sendKeyElement(titleTask, nameTask);
-        sendKeyElement(descriptionTask, description);
-        clickElement(submitTask);
-        Thread.sleep(5000);
+        Thread.sleep(3000);
     }
 
-    public void clickExit(){
-        clickElement(exit);
+    public void clickOnTask() {
+        clickElement(task);
     }
+
     public void completeTask(String nameTask2) throws InterruptedException {
-        String xpathCheckBoxTask1 = String.format(xpathCheckBoxTask, nameTask2);
-        clickElement(getDriver().findElement(By.xpath(xpathCheckBoxTask1)));
+        String xpathCheckBoxTask2 = String.format(xpathCheckBoxTask, nameTask2);
+        clickElement(getDriver().findElement(By.xpath(xpathCheckBoxTask2)));
         Thread.sleep(5000);
     }
 
-    public void verifyTask2(String nameTask2) throws InterruptedException {
-        clickElement(project);
+    public void verifyTask(String nameTask2) {
         String xpathNameTask2 = String.format(xpathNameTask, nameTask2);
-        WebElement taskNameActual = getDriver().findElement(By.xpath(xpathNameTask2));
-        Assert.assertTrue(taskNameActual.isDisplayed(), "Verify task2 successful");
+        clickElement(getDriver().findElement(By.xpath(xpathNameTask2)));
+        System.out.println("Verify task successful");
     }
 }

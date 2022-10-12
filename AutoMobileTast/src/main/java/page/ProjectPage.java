@@ -16,18 +16,16 @@ public class ProjectPage extends BasePage {
     @FindBy(xpath = "(//android.widget.TextView[@resource-id=\"com.todoist:id/name\"])[last()]")
     private WebElement project;
 
-    public void clickMenu(){
+    public void clickMenuButton() {
         clickElement(menu);
     }
 
-    public void clickProject(){
+    public void clickOnProject() {
         clickElement(project);
     }
 
-    public void verifyProject(String nameProject) throws InterruptedException {
-        Thread.sleep(3000);
-        String nameProjectActual = project.getText();
-        Assert.assertEquals(nameProjectActual, nameProject);
+    public void verifyProject(String nameProject) {
+        Assert.assertEquals(project.getText(), nameProject);
         System.out.println("Verify project success");
     }
 }

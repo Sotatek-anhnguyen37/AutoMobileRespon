@@ -20,13 +20,12 @@ public class TestAll extends BaseSetUp {
     public static final String EMAIL = "01112000hda@gmail.com";
     public static final String PASSWORD = "Baymax2000";
     public static final String NAME_PROJECT = "Daily Routine";
-    private String nameTask = TITLE_TASK + RandomNumber.randomNumber();
-    private String description = DESCRIPTION_TASK + RandomNumber.randomNumber();
-    private String nameTask2 = TITLE_TASK + RandomNumber.randomNumber();
-    private String description2 = DESCRIPTION_TASK + RandomNumber.randomNumber();
+    private String nameTask = TITLE_TASK + RandomNumber.createRandomNumber();
+    private String description = DESCRIPTION_TASK + RandomNumber.createRandomNumber();
+    private String nameTask2 = TITLE_TASK + RandomNumber.createRandomNumber();
+    private String description2 = DESCRIPTION_TASK + RandomNumber.createRandomNumber();
     private String idTask2 = "";
     private String idProject = "";
-
 
 
     @BeforeClass
@@ -43,46 +42,46 @@ public class TestAll extends BaseSetUp {
         LoginPage loginPage = new LoginPage(getAndroidDriver());
 
         projectAPI.createProject(NAME_PROJECT);
-        loginPage.clickContinueEmail();
+        loginPage.clickContinueEmailButton();
         loginPage.sendKeyEmailTextBox(EMAIL);
-        loginPage.clickContinueWithEmail();
-        loginPage.sendKeyTextPassWord(PASSWORD);
-        loginPage.clickLogin();
-        projectPage.clickMenu();
+        loginPage.clickContinueWithEmailButton();
+        loginPage.sendKeyTextPassword(PASSWORD);
+        loginPage.clickLoginButton();
+        projectPage.clickMenuButton();
         projectPage.verifyProject(NAME_PROJECT);
 
-        projectPage.clickProject();
-        taskPage.clickPlus();
+        projectPage.clickOnProject();
+        taskPage.clickQuickAddButton();
         taskPage.sendKeyTitleTask(nameTask);
         taskPage.sendKeyDescriptionTask(description);
-        taskPage.clickSubmitTask();
+        taskPage.clickSubmitTaskButton();
         taskAPI.verifyTask(nameTask);
 
         launchApp();
-        loginPage.clickContinueEmail();
+        loginPage.clickContinueEmailButton();
         loginPage.sendKeyEmailTextBox(EMAIL);
-        loginPage.clickContinueWithEmail();
-        loginPage.sendKeyTextPassWord(PASSWORD);
-        loginPage.clickLogin();
+        loginPage.clickContinueWithEmailButton();
+        loginPage.sendKeyTextPassword(PASSWORD);
+        loginPage.clickLoginButton();
+        projectPage.clickMenuButton();
 
-        projectPage.clickProject();
-        taskPage.clickPlus();
+        projectPage.clickOnProject();
+        taskPage.clickQuickAddButton();
         taskPage.sendKeyTitleTask(nameTask2);
         taskPage.sendKeyDescriptionTask(description2);
-        taskPage.clickSubmitTask();
+        taskPage.clickSubmitTaskButton();
 
         idTask2 = taskAPI.getTaskId(nameTask2);
-        taskPage.clickExit();
+        taskPage.clickOnTask();
         taskPage.completeTask(nameTask2);
-        taskAPI.reOpenTask(idTask2);
-        Thread.sleep(5000);
-        taskPage.verifyTask2(nameTask2);
+        taskAPI.reopenTask(idTask2);
+        taskPage.verifyTask(nameTask2);
     }
 
     @AfterClass
-    public void after(){
+    public void after() {
         ProjectAPI projectAPI = new ProjectAPI();
-        idProject  = projectAPI.getProjectId(NAME_PROJECT);
+        idProject = projectAPI.getProjectId(NAME_PROJECT);
         projectAPI.deleteProject(idProject);
         getAndroidDriver().quit();
     }

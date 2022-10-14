@@ -17,4 +17,4 @@ Test execution for todoit app mobile as required:
 How to use the project: 
 1. Install and using IntellIJ, JDK, APPIUM(1.19.1) and LDPlayer 
 2. Clone Project from my Github to your device. Then open IntellIJ, Click File -> select Open -> select Project you cloned
-3. In the left of the screen, click src -> main -> java -> test. Then right click TestAll and click on Run"TestAll".
+3. In the left of the screen, click src -> main -> java -> test. Then right click TestAll and click on Run"TestAll"...

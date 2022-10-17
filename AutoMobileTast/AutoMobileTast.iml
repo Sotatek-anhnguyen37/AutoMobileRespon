@@ -95,18 +95,6 @@
     <orderEntry type="library" name="Maven: io.cucumber:html-formatter:13.0.0" level="project" />
     <orderEntry type="library" name="Maven: io.cucumber:create-meta:4.0.0" level="project" />
     <orderEntry type="library" name="Maven: org.apiguardian:apiguardian-api:1.1.2" level="project" />
-    <orderEntry type="library" name="Maven: io.qameta.allure:allure-testng:2.14.0" level="project" />
-    <orderEntry type="library" name="Maven: io.qameta.allure:allure-java-commons:2.14.0" level="project" />
-    <orderEntry type="library" name="Maven: io.qameta.allure:allure-model:2.14.0" level="project" />
-    <orderEntry type="library" scope="RUNTIME" name="Maven: com.fasterxml.jackson.core:jackson-databind:2.12.3" level="project" />
-    <orderEntry type="library" scope="RUNTIME" name="Maven: com.fasterxml.jackson.core:jackson-annotations:2.12.3" level="project" />
-    <orderEntry type="library" scope="RUNTIME" name="Maven: com.fasterxml.jackson.core:jackson-core:2.12.3" level="project" />
-    <orderEntry type="library" scope="RUNTIME" name="Maven: org.apache.tika:tika-core:1.26" level="project" />
-    <orderEntry type="library" scope="RUNTIME" name="Maven: javax.xml.bind:jaxb-api:2.3.1" level="project" />
-    <orderEntry type="library" scope="RUNTIME" name="Maven: javax.activation:javax.activation-api:1.2.0" level="project" />
-    <orderEntry type="library" scope="RUNTIME" name="Maven: javax.activation:activation:1.1.1" level="project" />
-    <orderEntry type="library" scope="RUNTIME" name="Maven: org.jooq:joor-java-8:0.9.14" level="project" />
-    <orderEntry type="library" scope="RUNTIME" name="Maven: io.qameta.allure:allure-test-filter:2.14.0" level="project" />
     <orderEntry type="library" name="Maven: io.rest-assured:rest-assured:4.3.3" level="project" />
     <orderEntry type="library" name="Maven: org.codehaus.groovy:groovy:3.0.7" level="project" />
     <orderEntry type="library" name="Maven: org.codehaus.groovy:groovy-xml:3.0.7" level="project" />

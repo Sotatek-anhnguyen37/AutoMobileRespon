@@ -23,7 +23,7 @@ public class ProjectAPI extends BaseAPI {
     }
 
     public List<Project> getProjectList() {
-        Response response = sendGet(EndPoint.URL_GETALL_PROJECT);
+        Response response = sendGet(EndPoint.URL_GET_ALL_PROJECT);
         Type type = new TypeReference<List<Project>>() {
         }.getType();
         List<Project> projectList1 = response.getBody().as(type);

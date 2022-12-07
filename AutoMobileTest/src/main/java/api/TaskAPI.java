@@ -13,7 +13,7 @@ import java.util.List;
 public class TaskAPI extends BaseAPI {
 
     public List<Task> getTaskList() {
-        Response response = sendGet(EndPoint.URL_GETALL_TASK).then().statusCode(200).extract().response();
+        Response response = sendGet(EndPoint.URL_GET_ALL_TASK).then().statusCode(200).extract().response();
         Type type = new TypeReference<List<Task>>() {
         }.getType();
         List<Task> taskList1 = response.getBody().as(type);
